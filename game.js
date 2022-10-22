@@ -90,14 +90,16 @@ function getStage(){
 		item = images[key]
 		var isEnemy = (item.group == 'enemies')
 		if (isEnemy) {
+			var incV = item.velocityInc || 1
+			var incH = item.healthInc || 1
 			if (!item.defaultHealth){
 				item.defaultHealth = item.health
 			}
-			item.health = item.defaultHealth + STAGE*1 -1
+			item.health = item.defaultHealth + STAGE*incH - incH
 			if (!item.defaultVel){
 				item.defaultVel = item.velocity
 			}
-			item.velocity = item.defaultVel + STAGE*1 - 1
+			item.velocity = item.defaultVel + STAGE*incV - incV
 		}
 	}
 	return stage1;	

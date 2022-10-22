@@ -186,6 +186,8 @@ function getConfig(item,id){
 	obj.dieSound=item.dieSound;
 	obj.fireSound=item.fireSound;
 	obj.dragArea=item.dragArea;
+	obj.velocityInc=item.velocityInc;
+	obj.healthInc=item.healthInc;
 	
 	item.config=obj;
 	return obj;	
