@@ -150,9 +150,12 @@ function create() {
 	score0=game.add.text(game.width-100+2, ttop+2, "", { fill: '#404040', font : '16px Arial' });
 	score=game.add.text(game.width-100, ttop, "", { fill: '#FFFF40', font : '16px Arial' });
 	
-	game.add.text(60, 300, "30", { fill: '#FFFF40', font : '12px Arial' });
-	game.add.text(110, 300, "100", { fill: '#FFFF40', font : '12px Arial' });
-	game.add.text(160, 300, "150", { fill: '#FFFF40', font : '12px Arial' });
+	var posx = 60;
+	for(var key1 in players){
+		var value = players[key1]
+		game.add.text(posx, 300, ""+images[value].price, { fill: '#FFFF40', font : '12px Arial' });
+		posx+=50
+	}
 	
 	var coin=images['coin0'];
 	addItem(coin,game.width-250,ttop+9);
@@ -177,29 +180,19 @@ function setScoreValue(point,coin){
 	coins.text=numbers(coins.value,1000);	
 	
 	
-	if (!SOLDIER && coins.value>=30	){
-		images['soldier01'].onDrop=function(item){ SOLDIER=false; setScoreValue(0,-30); };
-		SOLDIER=addItem(images['soldier01'],50,315);
-	}
-	if (SOLDIER && coins.value<30){
-		SOLDIER.kill();
-		SOLDIER=false;
-	}
-	if (!ARCHER && coins.value>=100){
-		images['archer01'].onDrop=function(item){ ARCHER=false; setScoreValue(0,-100); };
-		ARCHER=addItem(images['archer01'],100,315);
-	}
-	if (ARCHER && coins.value<100){
-		ARCHER.kill();
-		ARCHER=false;
-	}
-	if (!window.WIZARD && coins.value>=150){
-		images['wizard'].onDrop=function(item){ window.WIZARD=false; setScoreValue(0,-150); };
-		window.WIZARD=addItem(images['wizard'],150,315);
-	}
-	if (window.WIZARD && coins.value<150){
-		window.WIZARD.kill();
-		window.WIZARD=false;
+	var posx = 50;
+	for(var key1 in players){
+		var ACTIVE = window[key1]
+		var value1 = players[key1]
+		if (!window[key1] && coins.value>=images[value1].price	){
+			images[value1].onDrop=function(item){ window[key1]=false; setScoreValue(0,-images[value1].price); };
+			window[key1]=addItem(images[value1],posx,315);
+		}
+		if (window[key1] && coins.value<images[value1].price){
+			window[key1].kill();
+			window[key1]=false;
+		}
+		posx+=50;
 	}
 	
 

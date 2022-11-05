@@ -178,6 +178,7 @@ function getConfig(item,id){
 	obj.health=getValue(item.health,1)*1;
 	obj.power=getValue(item.power,1)*1;
 	obj.hasText=item.hasText;
+	obj.price=item.price;
 	obj.die=item.die;
 	obj.damage=item.damage;
 	obj.onKill=item.onKill;

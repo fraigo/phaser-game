@@ -8,8 +8,16 @@ var MAXX=900;
 var BOSS=1;
 var GAREA=new GameArea(40,50,600,210,40,50,50,60);
 
-var ARCHER=false;
-var SOLDIER=false;
+
+var players = {
+  SOLDIER: 'soldier01',
+  ARCHER: 'archer01',
+  WIZARD: 'wizard'
+}
+
+for(var key in players){
+  window[key] = false
+}
 
 
 var config = [
@@ -132,6 +140,7 @@ var config = [
   {
     file: "archer1.png",
     name: "archer01",
+    price: 113,
     dim: [32, 48, 4],
     scale: [0.8, 0.8],
     step: [0],
@@ -147,6 +156,7 @@ var config = [
   {
     file: "soldier1.png",
     name: "soldier01",
+    price: 30,
     dim: [32, 48, 4],
     scale: [0.8, 0.8],
     step: [0],
@@ -162,6 +172,7 @@ var config = [
   {
     file: "wizard.png",
     name: "wizard",
+    price: 150,
     dim: [32, 32, 3],
     scale: [0.8, 0.8],
     step: [0],
