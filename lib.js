@@ -187,6 +187,8 @@ function getConfig(item,id){
 	obj.dieSound=item.dieSound;
 	obj.fireSound=item.fireSound;
 	obj.dragArea=item.dragArea;
+	obj.dropEvent=item.dropEvent;
+	obj.frames=item.frames;
 	obj.velocityInc=item.velocityInc;
 	obj.healthInc=item.healthInc;
 	
@@ -211,13 +213,13 @@ function addItem(config,newx,newy,loopFunc){
     	item.events.onInputDown.add(function(ev){ shootEvent(item); }, this);
 	}
 	if (_DEBUG && config.hasText){
-		var text=game.add.text(configx-config.width*ZOOM/2, configy+config.height*ZOOM/2, config.name, { fill: 'white', font : '8px Arial' });
+		var text=game.add.text(configx-config.width*ZOOM/2, configy+config.height*ZOOM/2, config.name, { fill: '#ffcccc', font : '8px Arial' });
 		item.text=text;		
 	}
 	
 	item.scale.set(config.scalex*ZOOM,config.scaley*ZOOM);
 	if (config.images>0 && config.velocity>0){
-		var anim = item.animations.add('walk'+config.id);
+		var anim = item.animations.add('walk'+config.id, config.frames);
 		//anim.onStart.add(animationStarted, this);
 		if (loopFunc){
 			anim.onLoop.add(loopFunc, this);			
@@ -282,6 +284,7 @@ function addItem(config,newx,newy,loopFunc){
         grpObj.body.immovable = true;
 		//grpObj.body.offset=new Phaser.Point(30,0);
 	}
+	item.dropEvent=config.dropEvent
 	return item;
 }
 

@@ -9,15 +9,6 @@ var BOSS=1;
 var GAREA=new GameArea(40,50,600,210,40,50,50,60);
 
 
-var players = {
-  SOLDIER: 'soldier01',
-  ARCHER: 'archer01',
-  WIZARD: 'wizard'
-}
-
-for(var key in players){
-  window[key] = false
-}
 
 
 var config = [
@@ -138,22 +129,6 @@ var config = [
     vel: 12,
   },
   {
-    file: "archer1.png",
-    name: "archer01",
-    price: 113,
-    dim: [32, 48, 4],
-    scale: [0.8, 0.8],
-    step: [0],
-    vel: [4],
-    health: 200,
-    group: "soldiers",
-    hasText: true,
-    shoot: "arrow01",
-    area: "blank01",
-    dragArea: GAREA,
-    shootEvent: "xinputDown",
-  },
-  {
     file: "soldier1.png",
     name: "soldier01",
     price: 30,
@@ -170,6 +145,22 @@ var config = [
     shootEvent: "xinputDown",
   },
   {
+    file: "archer1.png",
+    name: "archer01",
+    price: 100,
+    dim: [32, 48, 4],
+    scale: [0.8, 0.8],
+    step: [0],
+    vel: [4],
+    health: 200,
+    group: "soldiers",
+    hasText: true,
+    shoot: "arrow01",
+    area: "blank01",
+    dragArea: GAREA,
+    shootEvent: "xinputDown",
+  },
+  {
     file: "wizard.png",
     name: "wizard",
     price: 150,
@@ -179,10 +170,30 @@ var config = [
     vel: [4],
     health: 200,
     group: "soldiers",
-    hasText: true,
+    hasText: false,
     shoot: "magical",
     area: "blank02",
     dragArea: GAREA,
+    shootEvent: "xinputDown",
+  },
+  {
+    file: "img/wizard2.png",
+    name: "wizard2",
+    price: 200,
+    dim: [32, 48, 12],
+    frames: [8,9,10,11],
+    scale: [0.75, 0.75],
+    step: [0],
+    vel: [3],
+    health: 200,
+    group: "soldiers",
+    hasText: false,
+    shoot: "magical",
+    area: "blank02",
+    dragArea: GAREA,
+    dropEvent: function(item){
+      console.log('dropEvent', item);
+    },
     shootEvent: "xinputDown",
   },
   {
@@ -259,3 +270,16 @@ var audio = [
 ];
 
 var stage = [{ img: "back01", x: 0, y: 0 }];
+
+var players = {}
+
+for (var idx1 in config){
+  var cfg1 = config[idx1]
+  if (cfg1.price && cfg1.group=='soldiers'){
+    players[cfg1.name.toUpperCase()] = cfg1.name
+  }
+}
+
+for(var key in players){
+  window[key] = false
+}

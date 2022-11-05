@@ -182,11 +182,20 @@ function setScoreValue(point,coin){
 	
 	var posx = 50;
 	for(var key1 in players){
-		var ACTIVE = window[key1]
 		var value1 = players[key1]
 		if (!window[key1] && coins.value>=images[value1].price	){
-			images[value1].onDrop=function(item){ window[key1]=false; setScoreValue(0,-images[value1].price); };
+			images[value1].onDrop=function(item){ 
+				var key = item.key.toUpperCase();
+				var cfgItem = window[key]
+				console.log('drop', key, item.dropEvent)
+				window[key]=false; 
+				setScoreValue(0,-images[item.key].price); 
+				if (cfgItem.dropEvent){
+					cfgItem.dropEvent(item)
+				}
+			};
 			window[key1]=addItem(images[value1],posx,315);
+
 		}
 		if (window[key1] && coins.value<images[value1].price){
 			window[key1].kill();
