@@ -13,7 +13,7 @@ var GAREA=new GameArea(40,50,600,210,40,50,50,60);
 
 var config = [
   {
-    file: "background1.png",
+    file: "img/background1.png",
     name: "back01",
     dim: [],
     scale: [0.75, 0.75],
@@ -22,7 +22,7 @@ var config = [
     anchor: [0, 0],
   },
   {
-    file: "coin.png",
+    file: "img/coin.png",
     name: "coinLg",
     dim: [32, 32, 6],
     scale: [1, 1],
@@ -31,7 +31,7 @@ var config = [
     anchor: [0.5, 0.5],
   },
   {
-    file: "coin.png",
+    file: "img/coin.png",
     name: "coinSm",
     dim: [32, 32, 6],
     scale: [0.5, 0.5],
@@ -40,7 +40,7 @@ var config = [
     anchor: [0.5, 0.5],
   },
   {
-    file: "coin.png",
+    file: "img/coin.png",
     name: "coin0",
     dim: [32, 32, 6],
     scale: [0.5, 0.5],
@@ -69,7 +69,7 @@ var config = [
     group: "players",
   },
   {
-    file: "bullet.png",
+    file: "img/bullet.png",
     name: "bullet01",
     dim: [54, 17, 1],
     scale: [0.5, 0.5],
@@ -81,7 +81,7 @@ var config = [
     onLoop: killOnExit,
   },
   {
-    file: "arrow2.png",
+    file: "img/arrow2.png",
     name: "arrow01",
     dim: [88, 41, 4],
     scale: [-0.5, 0.5],
@@ -93,7 +93,7 @@ var config = [
     onLoop: killOnExit,
   },
   {
-    file: "magical.png",
+    file: "img/magical.png",
     name: "magical",
     dim: [34, 38, 15],
     scale: [-0.5, 0.5],
@@ -105,7 +105,30 @@ var config = [
     onLoop: killOnExit,
   },
   {
-    file: "bomb.png",
+    file: "img/fire1.png",
+    name: "fire1",
+    dim: [32, 32, 4],
+    scale: [0.75, 0.75],
+    step: [1.6],
+    vel: 2,
+    group: "shoots",
+    power: 12,
+    onLoop: killOnExit,
+  },
+  {
+    file: "img/rock1.png",
+    name: "rock1",
+    dim: [50, 50, 1],
+    scale: [0.4, 0.4],
+    step: [1.6],
+    vel: 2,
+    group: "shoots",
+    power: 10,
+    rotation: 0.1,
+    onLoop: killOnExit,
+  },
+  {
+    file: "img/bomb.png",
     name: "boom01",
     dim: [50, 100, 14],
     scale: [0.5, 0.5],
@@ -113,7 +136,7 @@ var config = [
     vel: 12,
   },
   {
-    file: "boom32wh12.png",
+    file: "img/boom32wh12.png",
     name: "boom02",
     dim: [32, 32, 12],
     scale: [1, 1],
@@ -121,7 +144,7 @@ var config = [
     vel: 12,
   },
   {
-    file: "boom32wh12.png",
+    file: "img/boom32wh12.png",
     name: "boom03",
     dim: [32, 32, 12],
     scale: [0.5, 0.5],
@@ -129,7 +152,7 @@ var config = [
     vel: 12,
   },
   {
-    file: "soldier1.png",
+    file: "img/soldier1.png",
     name: "soldier01",
     price: 30,
     dim: [32, 48, 4],
@@ -145,7 +168,7 @@ var config = [
     shootEvent: "xinputDown",
   },
   {
-    file: "archer1.png",
+    file: "img/archer1.png",
     name: "archer01",
     price: 100,
     dim: [32, 48, 4],
@@ -161,14 +184,14 @@ var config = [
     shootEvent: "xinputDown",
   },
   {
-    file: "wizard.png",
+    file: "img/wizard.png",
     name: "wizard",
     price: 150,
     dim: [32, 32, 3],
     scale: [0.8, 0.8],
     step: [0],
     vel: [4],
-    health: 200,
+    health: 300,
     group: "soldiers",
     hasText: false,
     shoot: "magical",
@@ -185,10 +208,10 @@ var config = [
     scale: [0.75, 0.75],
     step: [0],
     vel: [3],
-    health: 200,
+    health: 400,
     group: "soldiers",
     hasText: false,
-    shoot: "magical",
+    shoot: "fire1",
     area: "blank02",
     dragArea: GAREA,
     dropEvent: function(item){
@@ -197,7 +220,27 @@ var config = [
     shootEvent: "xinputDown",
   },
   {
-    file: "metalslug_monster.png",
+    file: "img/alien.png",
+    name: "alien",
+    price: 150,
+    dim: [64, 64, 273],
+    frames: [143,144,145,146,147,148,149,150,151],
+    scale: [0.666, 0.666],
+    step: [0],
+    vel: [9],
+    health: 400,
+    group: "soldiers",
+    hasText: false,
+    shoot: "rock1",
+    area: "blank02",
+    dragArea: GAREA,
+    dropEvent: function(item){
+      console.log('dropEvent', item);
+    },
+    shootEvent: "xinputDown",
+  },
+  {
+    file: "img/metalslug_monster.png",
     dim: [39, 40, 16],
     scale: [-1, 1],
     step: [-0.4],
@@ -218,7 +261,7 @@ var config = [
     },
   },
   {
-    file: "metalslug_mummy.png",
+    file: "img/metalslug_mummy.png",
     dim: [38, 46, 18],
     scale: [-1, 1],
     step: [-0.3],
@@ -239,7 +282,7 @@ var config = [
     },
   },
   {
-    file: "metalslug_monster.png",
+    file: "img/metalslug_monster.png",
     name: "boss",
     dim: [39, 40, 16],
     scale: [-4, 4],
@@ -263,10 +306,10 @@ var config = [
 ];
 
 var audio = [
-  { file: "lazer.wav", name: "shoot1" },
-  { file: "hit.wav", name: "shoot2" },
-  { file: "burn.wav", name: "damage" },
-  { file: "burn.wav", name: "damage2" },
+  { file: "sound/lazer.wav", name: "shoot1" },
+  { file: "sound/hit.wav", name: "shoot2" },
+  { file: "sound/burn.wav", name: "damage" },
+  { file: "sound/burn.wav", name: "damage2" },
 ];
 
 var stage = [{ img: "back01", x: 0, y: 0 }];

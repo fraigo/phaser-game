@@ -1,6 +1,6 @@
 var _DEBUG=1;
 var ZOOM=1;
-var BLANK='blank.png';
+var BLANK='img/blank.png';
 
 var score;
 var stage;
@@ -49,6 +49,7 @@ function IBehavior(){
 	this.stepy = 0;
 	this.x = 0;
 	this.y = 0;
+	this.rotation = 0;
 	this.anchorx = 0.5;
 	this.anchory = 0.5;
 	this.width = 0;
@@ -69,6 +70,9 @@ function IBehavior(){
 	this.move=function(item){
 		item.x+=this.stepx*ZOOM;
 		item.y+=this.stepy*ZOOM;
+		if (this.rotation){
+			item.rotation+=this.rotation;			
+		}
 		if (item.text){
 			item.text.x+=this.stepx*ZOOM;
 			item.text.text=this.getText(item);
@@ -140,8 +144,10 @@ function getConfig(item,id){
 		return item.config;
 	}
 	var obj=new IBehavior();
-	var parts=item.file.split(".");
-	obj.name=getValue(item.name,parts[0]);
+	var parts = item.file.split("/")
+	var basename = parts.pop()
+	var parts2=basename.split(".");
+	obj.name=getValue(item.name,parts2[0]);
 
 	obj.id="img"+getValue(id,"");
 	obj.filename=item.file;
@@ -162,6 +168,7 @@ function getConfig(item,id){
 	obj.stepy=getValue(item.step[1],obj.stepy)*1;
 	
 	obj.velocity=getValue(item.vel,0)*1;
+	obj.rotation=getValue(item.rotation,0)*1;
 	
 	if (item.group){
 		obj.group=item.group;		
@@ -198,7 +205,7 @@ function getConfig(item,id){
 
 
 
-function addItem(config,newx,newy,loopFunc){
+function addItem(config,newx,newy,loopFunc,updateFunc){
 	configx=getValue(newx,config.x)*ZOOM;
 	configy=getValue(newy,config.y)*ZOOM;
 	loopFunc=getValue(loopFunc,config.onLoop);
